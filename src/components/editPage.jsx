@@ -1,10 +1,10 @@
 import { TextField, Box, Button, styled } from "@mui/material";
-import React, { Component } from "react";
-import Navbar from "./navbar";
-import App from "../App";
+import React from "react";
+import { handleValue } from "./navbar";
+import { useState } from "react";
 
-class EditPage extends Component {
-  input = [
+export default function EditPage(params) {
+  const [input, setInput] = useState([
     { id: "1", name: "colorNav", type: "text", label: "Navbar Color" },
     { id: "2", name: "colorBG", type: "text", label: "Background Color" },
     { id: "3", name: "icon", type: "text", label: "Icon" },
@@ -24,9 +24,16 @@ class EditPage extends Component {
       type: "text",
       label: "Text Warning English",
     },
-    { id: "10", name: "ServiceName", type: "text", label: "Service Name" },
-  ];
-  state = {
+    {
+      id: "10",
+      name: "ServiceName",
+      type: "text",
+      label: "Service Name",
+      value: "",
+    },
+  ]);
+
+  const [state, setState] = useState({
     colorNav: "",
     colorBG: "",
     icon: "",
@@ -37,42 +44,36 @@ class EditPage extends Component {
     TextWarning: "",
     TextWarningEn: "",
     ServiceName: "",
-  };
-  handleChange = (e) => {
-    this.setState({
-      ...this.state,
+  });
+  const handleChange = (e) => {
+    setState({
+      ...state,
       [e.target.name]: e.target.value,
     });
   };
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Submit");
-    console.log(this.state.ServiceName)
-    
+    console.log(state.ServiceName);
   };
-  render() {
-    const ButtonStyle = styled(Button)(({ theme }) => ({
-      backgroundColor: theme.palette.main,
-      margin: 5,
-    }));
-    console.log(this.state);
-
-    return (
-      <Box>
-        <form onSubmit={this.handleSubmit}>
-          {this.input.map((input) => (
-            <TextField
-              key={input.id}
-              {...input}
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
-          ))}
-          <ButtonStyle type="submit">Submit</ButtonStyle>
-        </form>
-      </Box>
-    );
-  }
+  const ButtonStyle = styled(Button)(({ theme }) => ({
+    backgroundColor: theme.palette.main,
+    margin: 5,
+  }));
+  console.log(state);
+  return (
+    <Box>
+      <form onSubmit={() => handleValue(state.ServiceName)}>
+        {input.map((input) => (
+          <TextField
+            key={input.id}
+            {...input}
+            value={state.name}
+            onChange={handleChange}
+          />
+        ))}
+        <ButtonStyle type="submit">Submit</ButtonStyle>
+      </form>
+    </Box>
+  );
 }
-
-export default EditPage;
