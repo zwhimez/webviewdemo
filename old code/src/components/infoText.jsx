@@ -1,22 +1,18 @@
 import { Typography, Box, Stack } from "@mui/material";
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-class InfoText extends Component {
-  state = {
-    text: this.props.value
-  }
-  render() {
-    return (
-      <Box>
+export default function infoText(props) {
+  const [state, setState] = useState({
+    text: props.value
+  })
+  return (
+    <Box>
         <Stack direction="column" justifyContent="center" alignItems="center">
           <Typography>
-            {this.state.text}
+            {state.text}
           </Typography>
           <br />
         </Stack>
       </Box>
-    );
-  }
+  )
 }
-
-export default InfoText;

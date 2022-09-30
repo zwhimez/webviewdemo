@@ -1,7 +1,7 @@
 import { TextField, Box, Button, styled } from "@mui/material";
 import React from "react";
-import { handleValue } from "./navbar";
 import { useState } from "react";
+import Navbar from "./navbar"
 
 export default function EditPage(params) {
   const [input, setInput] = useState([
@@ -63,7 +63,7 @@ export default function EditPage(params) {
   console.log(state);
   return (
     <Box>
-      <form onSubmit={() => handleValue(state.ServiceName)}>
+      <form onSubmit={handleSubmit}>
         {input.map((input) => (
           <TextField
             key={input.id}
