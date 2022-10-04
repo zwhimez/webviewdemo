@@ -22,7 +22,7 @@ export const editPageSlice = createSlice({
   initialState,
   reducers: {
     editInfoText: (state, action) => {
-      state[4].value = action.payload;
+      state.ServiceName = action.payload.serviceName;
     },
   },
 });
